@@ -30,6 +30,13 @@ iqube_admin_access:
       - postgres_user: iqube_admin      
       - file: iqube_admin_access_remove_default
 
+postgres_reload_config:
+  cmd.run:
+    - name: "pg96reload.sh"
+    - require:
+      - file: iqube_admin_access
+      - file: pgctl_helper_reload
+
 iqube:  
   postgres_database.present:
     - require:      
@@ -48,7 +55,7 @@ pgdg.list:
     - name: /etc/apt/sources.list.d/pgdg.list
     - contents: deb http://apt.postgresql.org/pub/repos/apt/ xenial-pgdg main
 
-pgctl_helpers:
+pgctl_helper_reload:
   file.managed:
     - name: "/usr/local/bin/pg96reload.sh"
     - source: "/srv/salt/files/pg96reload.sh"
