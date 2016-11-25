@@ -37,13 +37,13 @@ postgres_listen_on_all_ifaces:
     - pattern: "^\\s*#?\\s*listen_addresses.*=.*"
     - repl: "listen_addresses = '*'"
 
-#postgres_reload_config:
-#  cmd.run:
-#    - name: "pg96restart.sh"
-#    - require:
-#      - file: iqube_admin_access
-#      - file: postgres_listen_on_all_ifaces
-#      - file: pgctl_helper_restart
+postgres_reload_config:
+  cmd.run:
+    - name: "pg96restart.sh"
+    - require:
+      - file: iqube_admin_access
+      - file: postgres_listen_on_all_ifaces
+      - file: pgctl_helper_restart
 
 iqube:  
   postgres_database.present:
