@@ -4,6 +4,14 @@ postgresql:
     - require:
       - cmd: update_apt_sources
 
+# This config is a hack to deal with a regression introduced in Salt 2016.11.0 (see e.g. https://github.com/saltstack/salt/issues/38001, https://github.com/saltstack/salt/issues/37935). Should be fixed by https://github.com/saltstack/salt/pull/37993, but as of now, not released yet.
+#
+salt_pg_bin_dir_config:
+  file.append:
+    - name: "/etc/salt/minion.d/minion.conf"
+    - text:
+      - "postgres.bins_dir: '/usr/lib/postgresql/9.6/bin/'"
+
 iqube_admin:
   postgres_user.present:
     - password: "iqube25"
@@ -11,6 +19,7 @@ iqube_admin:
     - encrypted: True
     - require:
       - pkg: postgresql
+      - file: salt_pg_bin_dir_config
   file.managed:
     - name: "/etc/postgresql/9.6/main/test.cfg"
     - contents: "test"
