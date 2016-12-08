@@ -75,23 +75,23 @@ pgdg.list:
 pgctl_helper_reload:
   file.managed:
     - name: "/usr/local/bin/pg96reload.sh"
-    - source: "/srv/salt/files/pg96reload.sh"
+    - source: "/srv/salt/files/postgres/pg96reload.sh"
     - mode: 0550
 
 pgctl_helper_stopfast:
   file.managed:
     - name: "/usr/local/bin/pg96stopfast.sh"
-    - source: "/srv/salt/files/pg96stopfast.sh"
+    - source: "/srv/salt/files/postgres/pg96stopfast.sh"
     - mode: 0550
 
 pgctl_helper_start:
   file.managed:
     - name: "/usr/local/bin/pg96start.sh"
-    - source: "/srv/salt/files/pg96start.sh"
+    - source: "/srv/salt/files/postgres/pg96start.sh"
     - mode: 0550
 
 pgctl_helper_restart:
   file.managed:
     - name: "/usr/local/bin/pg96restart.sh"
-    - source: "/srv/salt/files/pg96restart.sh"
+    - source: "/srv/salt/files/postgres/pg96restart.sh"
     - mode: 0550
